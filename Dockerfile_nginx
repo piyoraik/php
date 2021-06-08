@@ -2,4 +2,4 @@ FROM nginx:1.17
 
 RUN rm -f /etc/nginx/conf.d/*
 
-ADD ./conf/default.conf /etc/nginx/conf.d/default.conf
+ADD ./conf/nginx/default.conf /etc/nginx/conf.d/default.conf

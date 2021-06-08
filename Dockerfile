@@ -15,4 +15,4 @@ RUN apt-get install -y  libmagick++-dev \
 RUN docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/
 RUN docker-php-ext-install -j$(nproc) gd
 
-RUN docker-php-ext-install mysqli
+RUN docker-php-ext-install mysqli pdo_mysql

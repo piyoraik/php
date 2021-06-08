@@ -8,7 +8,7 @@ services:
       - 9000:9000
     volumes:
       - ./app:/var/www/html
-      - ./conf/php.ini:/usr/local/etc/php/php.ini
+      - ./conf/php/php.ini:/usr/local/etc/php/php.ini
     restart: always
 
   nginx:
@@ -22,30 +22,28 @@ services:
       - php
     volumes:
       - ./app:/var/www/html
-      - ./conf/default.conf:/etc/nginx/conf.d/default.conf
+      - ./conf/nginx/default.conf:/etc/nginx/conf.d/default.conf
     restart: always
 
   mariadb:
     container_name: mariadb
-    image: mariadb:10.5.4
+    build:
+      context: ./
+      dockerfile: Dockerfile_mariadb
     ports:
       - 3306:3306
+    depends_on:
+      - php
     volumes:
       - ./db:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: example
+      MYSQL_ROOT_PASSWORD: ${PASSWORD}
     restart: always
 
   phpmyadmin:
-    container_name: phpmyadmin
-    image: phpmyadmin/phpmyadmin:latest
+    image: phpmyadmin
+    restart: always
     ports:
       - 8081:80
-    depends_on:
-      - mariadb
     environment:
-      - PMA_PORT=3306
-      - PMA_HOST=mariadb
       - PMA_ARBITRARY=1
-      - PMA_USER=root
-      - PMA_PASSWORD=example

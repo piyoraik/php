@@ -10,9 +10,9 @@ RUN apt-get install -y  libmagick++-dev \
   libjpeg62-turbo-dev \
   libpng-dev \
   libwebp-dev \
-  libxpm-dev
+  libxpm-dev \
+  libgmp-dev
 
 RUN docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/
 RUN docker-php-ext-install -j$(nproc) gd
-
-RUN docker-php-ext-install mysqli pdo_mysql
+RUN docker-php-ext-install mysqli pdo_mysql gmp

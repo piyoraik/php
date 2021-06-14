@@ -1,9 +1,9 @@
 FROM php:8.0.0-fpm-buster
 
-RUN apt-get update
+RUN apt update -y
 
-RUN apt-get install -y wget libjpeg-dev libfreetype6-dev
-RUN apt-get install -y  libmagick++-dev \
+RUN apt install -y wget libjpeg-dev libfreetype6-dev && \
+  apt install -y  libmagick++-dev \
   libmagickwand-dev \
   libpq-dev \
   libfreetype6-dev \

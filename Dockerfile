@@ -17,4 +17,6 @@ RUN docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/i
       docker-php-ext-install -j$(nproc) gd && \
     docker-php-ext-install mysqli pdo_mysql gmp
 
+COPY ./conf/php/php.ini /usr/local/etc/php/php.ini
+
 COPY --from=composer /usr/bin/composer /usr/bin/composer

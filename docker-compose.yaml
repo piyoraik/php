@@ -8,7 +8,6 @@ services:
       - 9000:9000
     volumes:
       - ./app:/var/www/html
-      - ./conf/php/php.ini:/usr/local/etc/php/php.ini
     restart: always
 
   nginx:

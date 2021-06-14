@@ -6,6 +6,12 @@ restart:
 build:
 	docker compose build --no-cache
 
+exec:
+	docker exec -it php bash
+
+logs:
+	docker logs php
+
 up:
 	docker compose up -d
 

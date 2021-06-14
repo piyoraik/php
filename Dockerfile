@@ -13,6 +13,8 @@ RUN apt-get install -y  libmagick++-dev \
   libxpm-dev \
   libgmp-dev
 
-RUN docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/
-RUN docker-php-ext-install -j$(nproc) gd
-RUN docker-php-ext-install mysqli pdo_mysql gmp
+RUN docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ && \
+      docker-php-ext-install -j$(nproc) gd && \
+    docker-php-ext-install mysqli pdo_mysql gmp
+
+COPY --from=composer /usr/bin/composer /usr/bin/composer

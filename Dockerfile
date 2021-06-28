@@ -11,12 +11,15 @@ RUN apt install -y wget libjpeg-dev libfreetype6-dev && \
   libpng-dev \
   libwebp-dev \
   libxpm-dev \
-  libgmp-dev
+  libgmp-dev \
+  git
 
 RUN docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ && \
       docker-php-ext-install -j$(nproc) gd && \
     docker-php-ext-install mysqli pdo_mysql gmp
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+
+RUN composer require twig/twig
 
 COPY ./conf/php/php.ini /usr/local/etc/php/php.ini
 
-COPY --from=composer /usr/bin/composer /usr/bin/composer

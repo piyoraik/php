@@ -17,3 +17,6 @@ up:
 
 down:
 	docker compose down
+
+create:
+	docker compose run --rm php composer create-project laravel/laravel ${app}

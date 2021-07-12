@@ -12,14 +12,16 @@ RUN apt install -y wget libjpeg-dev libfreetype6-dev && \
   libwebp-dev \
   libxpm-dev \
   libgmp-dev \
-  git
+  git \
+  unzip
 
 RUN docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ && \
       docker-php-ext-install -j$(nproc) gd && \
     docker-php-ext-install mysqli pdo_mysql gmp
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
-RUN composer require twig/twig
+RUN composer global require "laravel/installer"
+RUN composer global require twig/twig
 
 COPY ./conf/php/php.ini /usr/local/etc/php/php.ini
 
